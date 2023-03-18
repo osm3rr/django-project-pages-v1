@@ -1,0 +1,112 @@
+.0 review of what has been done so far
+.1 folder to project
+
+.2 create a virtual enviroment
+    python -m venv .venv
+
+.3 activate the virtual enviroment
+    .venv\Scripts\Activate.ps1
+
+.4 install django 
+    python -m pip install django
+
+.5 start django project
+    django-admin startproject django_project .
+
+.6 start the app 
+    python manage.py startapp pages
+
+.7 add to the INSTALLED_APPS settings the new
+ app in django_project/settings.py
+    "pages.apps.PagesConfig"
+
+.8 Migrate the database
+    python manage.py migrate
+
+.9 run the server
+    python manage.py runserver
+
+.10 create templates directory
+    mkdir templates
+
+.11 update django_project/settings.py
+    "DIRS": [BASE_DIR / "templates"]
+
+.12 create a new file called home.html
+    touch home.html 
+    <h1>Homepage</h1>
+
+.13 Class-Based Views
+
+.14 Update the pages/views.py
+    from django.views.generic import TemplateView
+    class HomePageView(TemplateView):
+        template_name = "home.html"
+
+.15 update our URLs in django_project/urls.py file
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path("", include("pages.urls")),
+        ]
+
+.16 create a file called pages/urls.py
+    from django.urls import path
+    from .views import HomePageView
+
+    # when using Class-Based Views, you always add as_view() 
+    # at the end of the view name
+
+    urlpatterns = [
+        path("", HomePageView.as_view(), name="home"),
+    ]
+
+.17 Start up the local web server
+    python manage.py runserver
+
+.18 add an about page
+
+.19 make a new template file templates/about.html
+    <h1>About page</h1>
+
+.20 add a new view for the page
+    class AboutPageView(TemplateView):
+        template_name = "about.html"
+
+.21 connect it to a URL in pages/urls.py
+    from .views import HomePageView, AboutPageView
+
+    urlpatterns = [
+        path("about/", AboutPageView.as_view(), name="about"),
+        path("", HomePageView.as_view(), name="home"),
+        ]
+
+.22 Start up the web server
+    python manage.py runserver
+
+.23 Extending Templates templates/base.html
+    <header>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'about' %}">About</a>
+    </header>
+    {% block content %} {% endblock content %}
+
+.24 update our templates/home.html
+    {% extends "base.html" %}
+    
+    {% block content %}
+        <h1>Homepage</h1>
+    {% endblock content %}
+
+.24 update our templates/about.html
+
+    {% extends "base.html" %}
+    {% block content %}
+        <h1>About page</h1>
+    {% endblock content %}
+
+.25 update our repo in git
+
+

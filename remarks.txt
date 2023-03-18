@@ -1,4 +1,16 @@
-.0 review of what has been done so far
+.0 review of what has been done so far in django
+    - create a git local repository
+    - git init 
+    - 
+    - git add .
+    - git commit -m "first commit"
+    - git branch -M main
+    - git remote add origin url 
+    - git push -u origin main
+    - git branch dev 
+    - git checkout dev 
+    - git merge branch
+
 .1 folder to project
 
 .2 create a virtual enviroment
@@ -108,5 +120,6 @@
     {% endblock content %}
 
 .25 update our repo in git
+
 
 
